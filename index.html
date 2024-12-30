@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Button Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(234, 135, 135);
+        }
+
+        #no {
+            position: absolute;
+            transition: none;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            padding: 5px;
+            font-size: large;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border-radius: 3px;
+            background-color: rgb(255, 240, 242);
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+            border-radius: 30px;
+        }
+
+        #fs {
+            min-width: 80vw;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(235, 212, 212);
+            border-radius: 50px;
+        }
+
+        h1 {
+            color: rgb(38, 15, 121);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding: 2px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: rgb(234, 135, 135);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Heart shape using ::before and ::after */
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: fall 3s infinite ease-in;
+            opacity: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .heart::before {
+            left: 0;
+            top: -15px;
+        }
+
+        .heart::after {
+            left: 15px;
+            top: 0;
+        }
+
+        /* Create multiple heart animations */
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-duration: 3s;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            left: 20%;
+            animation-duration: 4s;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(3) {
+            left: 30%;
+            animation-duration: 5s;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(4) {
+            left: 40%;
+            animation-duration: 6s;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(5) {
+            left: 50%;
+            animation-duration: 7s;
+            animation-delay: 1.5s;
+        }
+
+        .heart:nth-child(6) {
+            left: 60%;
+            animation-duration: 4.5s;
+            animation-delay: 2.5s;
+        }
+
+        .heart:nth-child(7) {
+            left: 70%;
+            animation-duration: 5s;
+            animation-delay: 0.5s;
+        }
+
+        .heart:nth-child(8) {
+            left: 80%;
+            animation-duration: 6.5s;
+            animation-delay: 1s;
+        }
+      
+
+        .heart:nth-child(9) {
+            left: 90%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(45deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(100vh) rotate(45deg);
+            }}
+#m:hover{
+    background-color: rgb(197, 154, 154);
+    color: white;
+    width: 75px;
+    transition: all ease .5s;
+}
+        
+    </style>
+</head>
+
+<body>
+    
+    <audio id="audioPlayer" src="love.mp3" preload="auto"></audio>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <section id="fs">
+        <button id="m"style="width: 70px;" onclick="kj(this)">Play Music</button>
+        <img onclick="ll()" src="https://i.pinimg.com/originals/ed/69/31/ed6931bba91425579d67b6be8991a67e.gif" alt="">
+        <div class="timer"></div>
+        <h1>Hello wifey,want to kiss me?</h1>
+        <div>
+            <button onclick="yes()" style="width: 50px;" id="yes">Yes</button>
+            <button id="no" style="width: 50px;" onmouseover="moveButton(this)">No</button>
+        </div>
+    </section>
+
+    <script>
+        function kj(i){
+            const audio = document.getElementById('audioPlayer');
+            audio.play();
+            i.style.display='none';
+        }
+
+       
+        let moveCount = 0;
+        let yesButton = document.querySelector('#yes');
+        let noButton = document.querySelector('#no');
+
+        // Function to handle the "No" button mouseover behavior
+        function moveButton(button) {
+            // Increase size and position randomly when hovering over "No" button
+            let newWidth = 60; // Directly set width
+            let newHeight = 60; // Directly set height
+
+            yesButton.style.width = newWidth + 'px';
+            yesButton.style.height = newHeight + 'px';
+
+            let randomX = Math.floor(Math.random() * (window.innerWidth - 100));
+            let randomY = Math.floor(Math.random() * (window.innerHeight - 100));
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+
+            moveCount++;
+
+            if (moveCount === 10) {
+                document.querySelector('h1').innerText = "Hyaa kati no vaneko ho ra😠.Yes vanna paryo k🥺🥺";
+                // After 2 movements, start following mouse for the "Yes" button
+                noButton.style.display = "none"; // Hide the "No" button
+
+                // Start following the mouse immediately after the second move
+                document.addEventListener('mousemove', followMouse);
+            }
+        }
+
+        // Function to make the Yes button follow the mouse
+        function followMouse(e) {
+            // Update the "Yes" button position directly to the mouse coordinates
+            let followX = e.pageX - yesButton.offsetWidth / 2; // Center the button
+            let followY = e.pageY - yesButton.offsetHeight / 2;
+
+            yesButton.style.position = 'absolute';
+            yesButton.style.left = followX + 'px';
+            yesButton.style.top = followY + 'px';
+        }
+
+        // Function to handle the "Yes" button click
+        function yes() {
+            // Hide both buttons
+            let buttons = document.querySelectorAll('button');
+            buttons[0].style.display = 'none';  // Hide the 'Yes' button
+            buttons[1].style.display = 'none';  // Hide the 'No' button
+
+            // Update the text of the h1 element
+            document.querySelector('h1').innerText = "Malai tha thiyo YES vanxau vanera😊💕My baby Kaile ho tani😊💕";
+        }
+        document.addEventListener('mouseover',()=>{
+            document.querySelector('img').click();
+            const audio = document.getElementById('audioPlayer');
+            audio.play();
+        })
+        window.onload = function() {
+            var audio = document.getElementById("");
+
+            // Start playing the audio automatically but muted
+            audio.play();
+
+            // After a short delay, unmute the audio (optional)
+            setTimeout(function() {
+                audio.muted = false; // Unmute audio after 1 second
+            }, 1); // 1 second delay
+        };
+    </script>
+</body>
+
+</html>
